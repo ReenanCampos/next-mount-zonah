@@ -37,7 +37,6 @@ export default function HomePage(props) {
   const [ session, loading ] = useSession();
   
   if (typeof window !== 'undefined' && !session ) return null;
-  console.log("TEM SESSAO", session);
 
   // useEffect(() => {
   //   if(!session)
@@ -67,11 +66,13 @@ export default function HomePage(props) {
                 <GridItem xs={12} sm={12} md={6}>
                   <div className={classes.profile}>
                     <div>
-                      <Image
+                      {/* <Image
                         src={session?.user?.image}
                         alt="..."
                         className={imageClasses}
-                      />
+                        layout='fill'
+                        objectFit='contain'
+                      /> */}
                     </div>
                     <div className={classes.name}>
                       <h3 className={classes.title}>{session?.username}</h3>
@@ -110,11 +111,15 @@ export default function HomePage(props) {
                                 alt="..."
                                 src="/img/examples/studio-1.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/studio-2.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4}>
@@ -122,11 +127,19 @@ export default function HomePage(props) {
                                 alt="..."
                                 src="/img/examples/studio-5.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/studio-4.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
+                                layout='fill'
+                                objectFit='contain'
                               />
                             </GridItem>
                           </GridContainer>
@@ -142,16 +155,22 @@ export default function HomePage(props) {
                                 alt="..."
                                 src="/img/examples/olu-eletu.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/clem-onojeghuo.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/cynthia-del-rio.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4}>
@@ -159,11 +178,15 @@ export default function HomePage(props) {
                                 alt="..."
                                 src="/img/examples/mariya-georgieva.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/clem-onojegaw.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                             </GridItem>
                           </GridContainer>
@@ -179,11 +202,15 @@ export default function HomePage(props) {
                                 alt="..."
                                 src="/img/examples/mariya-georgieva.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/studio-3.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4}>
@@ -191,16 +218,22 @@ export default function HomePage(props) {
                                 alt="..."
                                 src="/img/examples/clem-onojeghuo.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/olu-eletu.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/studio-1.jpg"
                                 className={navImageClasses}
+                                layout='fill'
+                                objectFit='contain'
                               />
                             </GridItem>
                           </GridContainer>
@@ -228,7 +261,7 @@ export const getServerSideProps = async (req) => {
       res.setHeader("location", "/login");
       res.statusCode = 307;
       res.end();
-      return;
+      return{props:{}};
   }
 
   return {

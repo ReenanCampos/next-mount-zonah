@@ -169,7 +169,7 @@ export const getServerSideProps = async (req) => {
       res.setHeader("location", "/home");
       res.statusCode = 307;
       res.end();
-      return;
+      return{props:{}};
   }
 
   return {
