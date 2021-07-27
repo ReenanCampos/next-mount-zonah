@@ -17,6 +17,7 @@ import Header from "components/Header/Header.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
+import Image from 'next/image'
 
 import styles from "styles/jss/nextjs-material-kit/pages/componentsSections/navbarsStyle.js";
 
@@ -305,7 +306,7 @@ export default function SectionNavbars() {
                     hoverColor="black"
                     dropdownHeader="Dropdown Header"
                     buttonText={
-                      <img
+                      <Image
                         src="/img/faces/avatar.jpg"
                         className={classes.img}
                         alt="profile"

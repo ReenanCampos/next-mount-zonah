@@ -19,6 +19,7 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
+import Image from 'next/image'
 
 import styles from "styles/jss/nextjs-material-kit/pages/profilePage.js";
 
@@ -66,7 +67,7 @@ export default function HomePage(props) {
                 <GridItem xs={12} sm={12} md={6}>
                   <div className={classes.profile}>
                     <div>
-                      <img
+                      <Image
                         src={session?.user?.image}
                         alt="..."
                         className={imageClasses}
@@ -105,24 +106,24 @@ export default function HomePage(props) {
                         tabContent: (
                           <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={4}>
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/studio-1.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/studio-2.jpg"
                                 className={navImageClasses}
                               />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4}>
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/studio-5.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/studio-4.jpg"
                                 className={navImageClasses}
@@ -137,29 +138,29 @@ export default function HomePage(props) {
                         tabContent: (
                           <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={4}>
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/olu-eletu.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/clem-onojeghuo.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/cynthia-del-rio.jpg"
                                 className={navImageClasses}
                               />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4}>
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/mariya-georgieva.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/clem-onojegaw.jpg"
                                 className={navImageClasses}
@@ -174,29 +175,29 @@ export default function HomePage(props) {
                         tabContent: (
                           <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={4}>
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/mariya-georgieva.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/studio-3.jpg"
                                 className={navImageClasses}
                               />
                             </GridItem>
                             <GridItem xs={12} sm={12} md={4}>
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/clem-onojeghuo.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/olu-eletu.jpg"
                                 className={navImageClasses}
                               />
-                              <img
+                              <Image
                                 alt="..."
                                 src="/img/examples/studio-1.jpg"
                                 className={navImageClasses}

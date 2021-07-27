@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Button from "components/CustomButtons/Button.js";
+import Image from 'next/image'
 
 import styles from "styles/jss/nextjs-material-kit/pages/componentsSections/exampleStyle.js";
 
@@ -23,7 +24,7 @@ export default function SectionExamples() {
           <GridItem xs={12} sm={12} md={6}>
             <Link href="/landing">
               <a className={classes.link}>
-                <img
+                <Image
                   src="/img/landing.jpg"
                   alt="..."
                   className={
@@ -43,7 +44,7 @@ export default function SectionExamples() {
           <GridItem xs={12} sm={12} md={6}>
             <Link href="/profile">
               <a className={classes.link}>
-                <img
+                <Image
                   src="/img/profile.jpg"
                   alt="..."
                   className={

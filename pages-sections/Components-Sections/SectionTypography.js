@@ -15,6 +15,7 @@ import Info from "components/Typography/Info.js";
 import Primary from "components/Typography/Primary.js";
 import Muted from "components/Typography/Muted.js";
 import Quote from "components/Typography/Quote.js";
+import Image from 'next/image'
 
 import styles from "styles/jss/nextjs-material-kit/pages/componentsSections/typographyStyle.js";
 
@@ -148,7 +149,7 @@ export default function SectionTypography() {
           <GridContainer>
             <GridItem xs={12} sm={2}>
               <h4>Rounded Image</h4>
-              <img
+              <Image
                 src="/img/faces/avatar.jpg"
                 alt="..."
                 className={classes.imgRounded + " " + classes.imgFluid}
@@ -156,7 +157,7 @@ export default function SectionTypography() {
             </GridItem>
             <GridItem xs={12} sm={2} className={classes.marginLeft}>
               <h4>Circle Image</h4>
-              <img
+              <Image
                 src="/img/faces/avatar.jpg"
                 alt="..."
                 className={classes.imgRoundedCircle + " " + classes.imgFluid}
@@ -164,7 +165,7 @@ export default function SectionTypography() {
             </GridItem>
             <GridItem xs={12} sm={2} className={classes.marginLeft}>
               <h4>Rounded Raised</h4>
-              <img
+              <Image
                 src="/img/faces/avatar.jpg"
                 alt="..."
                 className={
@@ -178,7 +179,7 @@ export default function SectionTypography() {
             </GridItem>
             <GridItem xs={12} sm={2} className={classes.marginLeft}>
               <h4>Circle Raised</h4>
-              <img
+              <Image
                 src="/img/faces/avatar.jpg"
                 alt="..."
                 className={

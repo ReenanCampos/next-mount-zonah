@@ -9,6 +9,7 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Card from "components/Card/Card.js";
+import Image from 'next/image'
 
 import styles from "styles/jss/nextjs-material-kit/pages/componentsSections/carouselStyle.js";
 
@@ -32,7 +33,7 @@ export default function SectionCarousel() {
             <Card carousel>
               <Carousel {...settings}>
                 <div>
-                  <img
+                  <Image
                     src="/img/bg.jpg"
                     alt="First slide"
                     className="slick-image"
@@ -45,7 +46,7 @@ export default function SectionCarousel() {
                   </div>
                 </div>
                 <div>
-                  <img
+                  <Image
                     src="/img/bg2.jpg"
                     alt="Second slide"
                     className="slick-image"
@@ -58,7 +59,7 @@ export default function SectionCarousel() {
                   </div>
                 </div>
                 <div>
-                  <img
+                  <Image
                     src="/img/bg3.jpg"
                     alt="Third slide"
                     className="slick-image"

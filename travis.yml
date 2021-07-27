@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - 14.17.3
+install:
+  - yarn
+  
+script:
+  - echo "Skipping tests, install/build OK"
