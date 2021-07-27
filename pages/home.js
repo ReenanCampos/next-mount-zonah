@@ -129,15 +129,11 @@ export default function HomePage(props) {
                                 className={navImageClasses}
                                 layout='fill'
                                 objectFit='contain'
-                                layout='fill'
-                                objectFit='contain'
                               />
                               <Image
                                 alt="..."
                                 src="/img/examples/studio-4.jpg"
                                 className={navImageClasses}
-                                layout='fill'
-                                objectFit='contain'
                                 layout='fill'
                                 objectFit='contain'
                               />
