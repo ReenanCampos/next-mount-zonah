@@ -1,6 +1,5 @@
 
-import { useSession, getSession, signIn, signOut } from "next-auth/client";
-import Router from "next/router";
+import { useRouter } from 'next/router';
 import {useEffect, React} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -10,6 +9,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Camera from "@material-ui/icons/Camera";
 import Palette from "@material-ui/icons/Palette";
 import Favorite from "@material-ui/icons/Favorite";
+
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -21,11 +24,17 @@ import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Image from 'next/image'
 
+import { signIn, signOut, useSession, getSession } from 'next-auth/client'
+import axios from 'axios'
+
 import styles from "styles/jss/nextjs-material-kit/pages/profilePage.js";
 
 const useStyles = makeStyles(styles);
 
 export default function HomePage(props) {
+  const [ session, loading ] = useSession()
+  const router = useRouter();
+  
   const classes = useStyles();
   const { ...rest } = props;
   const imageClasses = classNames(
@@ -34,19 +43,8 @@ export default function HomePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  const [ session, loading ] = useSession();
-  
-  if (typeof window !== 'undefined' && !session ) return null;
-
-  // useEffect(() => {
-  //   if(!session)
-  //     Router.push("/login");
-  //     else return "";
-  // }, []);
-
-  if(session){
-    return (
-      <div>
+  const navMain = classNames(classes.main, classes.mainRaised);
+  return (<div>
         <Header
           color="transparent"
           brand="Mount Zonah Medical Center"
@@ -59,23 +57,22 @@ export default function HomePage(props) {
           {...rest}
         />
         <Parallax small filter image="/img/profile-bg.jpg" />
-        <div className={classNames(classes.main, classes.mainRaised)}>
+        <div className={navMain}>
           <div>
             <div className={classes.container}>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={6}>
                   <div className={classes.profile}>
                     <div>
-                      {/* <Image
-                        src={session?.user?.image}
+                      <img
+                        src={'/img/favicon.png'}
                         alt="..."
                         className={imageClasses}
-                        layout='fill'
-                        objectFit='contain'
-                      /> */}
+                      />
                     </div>
                     <div className={classes.name}>
-                      <h3 className={classes.title}>{session?.username}</h3>
+                      <h3 className={classes.title}>{session?.user?.name}</h3><br></br>
+                      <h4 className={classes.title}>{session?.user?.email}</h4>
                       <h6>BEM VINDO(A) !</h6>
                       <Button justIcon link className={classes.margin5}>
                         <i className={"fab fa-twitter"} />
@@ -102,8 +99,8 @@ export default function HomePage(props) {
                     color="primary"
                     tabs={[
                       {
-                        tabButton: "Studio",
-                        tabIcon: Camera,
+                        tabButton: "Pacientes",
+                        tabIcon: AssignmentIndIcon,
                         tabContent: (
                           <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={4}>
@@ -142,8 +139,8 @@ export default function HomePage(props) {
                         ),
                       },
                       {
-                        tabButton: "Work",
-                        tabIcon: Palette,
+                        tabButton: "Exames",
+                        tabIcon: ReceiptIcon,
                         tabContent: (
                           <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={4}>
@@ -189,8 +186,8 @@ export default function HomePage(props) {
                         ),
                       },
                       {
-                        tabButton: "Favorite",
-                        tabIcon: Favorite,
+                        tabButton: "Médicos",
+                        tabIcon: LocalHospitalIcon,
                         tabContent: (
                           <GridContainer justify="center">
                             <GridItem xs={12} sm={12} md={4}>
@@ -243,24 +240,37 @@ export default function HomePage(props) {
           </div>
         </div>
         <Footer />
-      </div>
-    );
-  }else{
-    return <></>
-  }
+      </div>);
+  
 }
 
-export const getServerSideProps = async (req) => {
-  const session = await getSession(req);
-  if (!session) {
-      const { res } = req;
-      res.setHeader("location", "/login");
-      res.statusCode = 307;
-      res.end();
-      return{props:{}};
+export async function getServerSideProps({req}) {
+  
+  let headers = {}
+  const session = await getSession({ req });
+  console.log("s",session);
+  if (session) {
+    headers = {Authorization: `Bearer ${session.jwt}`};
+  }else{
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/login",
+      },
+      props:{},
+    }
   }
 
-  return {
-      props: {},
-  };
-};
+  let journals = [];
+  try {
+    // let {data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/journals`, {
+    //   headers: headers,
+    // })
+    journals = [];
+  } catch (e) {
+    console.log('caught error', e);
+    journals = [];
+  }
+  
+  return {props: {journals: journals}}  
+}

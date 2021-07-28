@@ -1,8 +1,9 @@
 /*eslint-disable*/
 import React from "react";
 import Link from "next/link";
-
-import { useSession, getSession, signIn, signOut } from "next-auth/client";
+import { useRouter } from 'next/router';
+import { signIn, signOut, useSession, getSession } from 'next-auth/client'
+import axios from 'axios'
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,11 +26,10 @@ import styles from "styles/jss/nextjs-material-kit/components/headerLinksStyle.j
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+  // const [ session, loading ] = useSession()
   const classes = useStyles();
-  
 
-  return (
-    <List className={classes.list}>
+  return <List className={classes.list}>
       {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -81,20 +81,21 @@ export default function HeaderLinks(props) {
           placement={"top"}
           classes={{ tooltip: classes.tooltip }}
         >
-          <Button
-            color="transparent"
-            className={classes.navLink}
-            onClick={(e) => {
-              e.preventDefault();
-              signOut();
-            }}
-          >
-            <Link href="/api/auth/signout">
-            <i className={classes.socialIcons + " fas fa-sign-out-alt"} />
-            </Link>
-          </Button>
+          
+            <Button
+              color="transparent"
+              className={classes.navLink}
+              onClick={(e) => {
+                e.preventDefault();
+                signOut();
+              }}
+            >
+              <i className={classes.socialIcons + " fas fa-sign-out-alt"} />
+            </Button>
+          
         </Tooltip>
       </ListItem>
     </List>
-  );
+    
+
 }

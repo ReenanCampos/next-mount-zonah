@@ -1,5 +1,4 @@
 
-import { useSession, getSession, signIn, signOut } from "next-auth/client";
 
 import React from "react";
 // @material-ui/core components
@@ -24,155 +23,138 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 
 import styles from "styles/jss/nextjs-material-kit/pages/loginPage.js";
 
-
+import { useRouter } from 'next/router';
+import { signIn, signOut, useSession, getSession } from 'next-auth/client'
+import axios from 'axios';
 import Link from "next/link";
 
 const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
+  const [ session, loading ] = useSession()
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
-
-  const [ session, loading ] = useSession();
-
-  if (typeof window !== 'undefined' && loading) return null
-
-  const signInButtonNode = () => {
-    if (session) {
-      return false;
-    }
-    return (
-      <div>
-        <Link href="/api/auth/signin">
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              signIn();
-            }}
-          >
-            Sign In
-          </button>
-        </Link>
-      </div>
-    );
-  };
-  if(!session){
-
   
-    return (
-      <div>
-        <Header
-          absolute
-          color="transparent"
-          brand="Mount Zonah Medical Center"
-          {...rest}
-        />
-        <div
-          className={classes.pageHeader}
-          style={{
-            backgroundImage: "url('/img/bg7.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "top center",
-          }}
-        >
-          <div className={classes.container}>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={6} md={4}>
-                <Card className={classes[cardAnimaton]}>
-                  <form className={classes.form}>
-                    <CardHeader color="primary" className={classes.cardHeader}>
-                      <h4>Login</h4>
-                      <div className={classes.socialLine}>
-                        <Link href="/api/auth/signin">
-                          <Button
-                          justIcon
-                          color="transparent"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              signIn();
-                            }}
-                          >
-                            <i className={"fab fa-discord"} />
-                          </Button>
-                        </Link>
+
+  //---
+  const router = useRouter();
+
+  return (
+    <div>
+      <Header
+        absolute
+        color="transparent"
+        brand="Mount Zonah Medical Center"
+        {...rest}
+      />
+      <div
+        className={classes.pageHeader}
+        style={{
+          backgroundImage: "url('/img/bg7.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      >
+        <div className={classes.container}>
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={6} md={4}>
+              <Card className={classes[cardAnimaton]}>
+                <form className={classes.form} >
+                  <CardHeader color="primary" className={classes.cardHeader}>
+                    <h4>Login</h4>
+                    {/* <div className={classes.socialLine}>
+                      <Link href="/api/auth/signin">
+                        <Button
+                        justIcon
+                        color="transparent"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            signIn();
+                          }}
+                        >
+                          <i className={"fab fa-discord"} />
+                        </Button>
+                      </Link>
 
 
-                      </div>
-                    </CardHeader>
-                    <p className={classes.divider}>Ou</p>
-                    <CardBody>
-                      <CustomInput
-                        disabled
-                        labelText="Email ..."
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Email className={classes.inputIconsColor} />
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        disabled
-                        labelText="Password ..."
-                        id="pass"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <Icon className={classes.inputIconsColor}>
-                                lock_outline
-                              </Icon>
-                            </InputAdornment>
-                          ),
-                          autoComplete: "off",
-                        }}
-                      />
-                    </CardBody>
-                    <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg" disabled>
-                        Entrar
-                      </Button>
-                    </CardFooter>
-                  </form>
-                </Card>
-              </GridItem>
-            </GridContainer>
-          </div>
-          <Footer whiteFont />
+                    </div> */}
+                  </CardHeader>
+                  {/* <p className={classes.divider}>Ou</p> */}
+                  <CardBody>
+
+                  {/* {!session && <> */}
+                  {/* <button onClick={() => signIn()}>Entrar</button></>} */}
+                    {/* <CustomInput
+                      labelText="Email ..."
+                      id="email"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        name: "email",
+                        type: "email",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Email className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        ),
+                      }}
+                    />
+                    <CustomInput
+                      labelText="Password ..."
+                      id="pass"
+                      formControlProps={{
+                        fullWidth: true,
+                      }}
+                      inputProps={{
+                        name: "password",
+                        type: "password",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Icon className={classes.inputIconsColor}>
+                              lock_outline
+                            </Icon>
+                          </InputAdornment>
+                        ),
+                        autoComplete: "off",
+                      }}
+                    /> */}
+                  </CardBody>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button simple color="primary" size="lg" type="submit" onClick={() => signIn()}>
+                      Entrar
+                    </Button>
+                  </CardFooter>
+                </form>
+              </Card>
+            </GridItem>
+          </GridContainer>
         </div>
+        <Footer whiteFont />
       </div>
-    );
+    </div>
+  );
 
-  } else {
-    return <></>
-  }
 }
 
-
-export const getServerSideProps = async (req) => {
-  const session = await getSession(req);
+export async function getServerSideProps({req}) {
+  
+  let headers = {}
+  const session = await getSession({ req });
   if (session) {
-      const { res } = req;
-      res.setHeader("location", "/home");
-      res.statusCode = 307;
-      res.end();
-      return{props:{}};
+    headers = {Authorization: `Bearer ${session.jwt}`};
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/home",
+      },
+      props:{},
+    }
   }
 
-  return {
-      props: {},
-  };
-};
+  return {props: {}}  
+}

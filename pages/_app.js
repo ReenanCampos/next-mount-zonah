@@ -29,8 +29,7 @@ Router.events.on("routeChangeError", () => {
 });
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
+  static async getInitialProps({ Component, ctx, pageProps }) {
 
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx);
@@ -42,7 +41,7 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Provider session={pageProps.session} >
+      <Provider session={pageProps?.session} >
       
       <React.Fragment>
         <Head>
